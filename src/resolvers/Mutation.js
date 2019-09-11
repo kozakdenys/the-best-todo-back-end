@@ -14,32 +14,8 @@ async function signup(parent, args, context, info) {
     }
 }
 
-function updateLink(parent, args, context, info) {
-    const userId = getUserId(context);
-
-    return context.prisma.updateLink({
-        data: {
-            url: args.url,
-            description: args.description
-        },
-        where: {
-            id: args.id
-        }
-    });
-}
-
-function deleteLink(parent, args, context, info) {
-    const userId = getUserId(context);
-
-    return context.prisma.deleteLink({
-        where: {
-            id: args.id
-        }
-    });
-}
-
 async function login(parent, args, context, info) {
-    const user = await context.prisma.user({ email: args.email });
+    const user = await context.prisma.user({ name: args.name });
 
     if (!user) {
         throw new Error('No such user found')
@@ -59,38 +35,45 @@ async function login(parent, args, context, info) {
     }
 }
 
-function post(parent, args, context, info) {
+function createItem(parent, args, context, info) {
     const userId = getUserId(context);
 
-    return context.prisma.createLink({
-        url: args.url,
+    return context.prisma.createItem({
+        name: args.name,
         description: args.description,
         postedBy: { connect: { id: userId } },
     })
 }
 
-async function vote(parent, args, context, info) {
+function updateItem(parent, args, context, info) {
     const userId = getUserId(context);
-    const linkExists = await context.prisma.$exists.vote({
-        user: { id: userId },
-        link: { id: args.linkId },
+
+    return context.prisma.updateItem({
+        data: {
+            name: args.name,
+            description: args.description,
+            done: args.done
+        },
+        where: {
+            id: args.id
+        }
     });
+}
 
-    if (linkExists) {
-        throw new Error(`Already voted for link: ${args.linkId}`)
-    }
+function deleteItem(parent, args, context, info) {
+    const userId = getUserId(context);
 
-    return context.prisma.createVote({
-        user: { connect: { id: userId } },
-        link: { connect: { id: args.linkId } },
+    return context.prisma.deleteItem({
+        where: {
+            id: args.id
+        }
     });
 }
 
 module.exports = {
     signup,
     login,
-    post,
-    vote,
-    updateLink,
-    deleteLink
+    createItem,
+    updateItem,
+    deleteItem
 };

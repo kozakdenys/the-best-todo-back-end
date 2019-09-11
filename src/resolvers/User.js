@@ -1,7 +1,7 @@
-function links(parent, args, context) {
-    return context.prisma.user({ id: parent.id }).links();
+function items(parent, args, context) {
+    return context.prisma.user({ id: parent.id }).items();
 }
 
 module.exports = {
-    links
+    items
 };
