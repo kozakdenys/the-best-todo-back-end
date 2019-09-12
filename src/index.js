@@ -13,8 +13,7 @@ const server = new GraphQLServer({
         Mutation,
         Subscription,
         User,
-        Link,
-        Vote
+        Item,
     },
     context: request => {
         return {

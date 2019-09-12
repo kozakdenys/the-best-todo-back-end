@@ -1,6 +1,7 @@
 type Query {
     feed(filter: String, skip: Int, first: Int, orderBy: ItemOrderByInput): Feed
     item(id: ID!): Item!
+    user: User
 }
 
 type Mutation {
@@ -38,6 +39,7 @@ type AuthPayload {
 type User {
     id: ID!
     name: String!
+    items: [Item!]!
 }
 
 enum ItemOrderByInput {
