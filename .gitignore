@@ -1,3 +1,4 @@
-/node_modules
-/.idea
-/src/secret.js
+node_modules
+.idea
+src/secret.js
+.env
