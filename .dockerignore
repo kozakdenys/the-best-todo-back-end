@@ -1,8 +1,7 @@
 node_modules
+prisma
 .dockerignore
 .env
 .gitignore
-docker-compose.override.yml
-docker-compose.yml
 Dockerfile
 .idea
