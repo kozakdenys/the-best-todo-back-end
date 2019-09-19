@@ -1,12 +1,19 @@
 const { getUserId } = require("../utils");
 
 async function feed(parent, args, context, info) {
-    const where = args.filter ? {
-        OR: [
+    const userId = getUserId(context);
+    const where = {
+        postedBy: {
+            id: userId
+        }
+    };
+
+    if (args.filter) {
+        where.OR = [
             { description_contains: args.filter },
             { name_contains: args.filter },
         ]
-    }: {};
+    }
     const items = await context.prisma.items({
         where,
         skip: args.skip,

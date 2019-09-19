@@ -3,7 +3,7 @@ type Item {
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
     name: String!
-    description: String!
+    description: String! @default(value: "")
     postedBy: User!
     done: Boolean! @default(value: false)
 }

@@ -64,9 +64,7 @@ function deleteItem(parent, args, context, info) {
     const userId = getUserId(context);
 
     return context.prisma.deleteItem({
-        where: {
-            id: args.id
-        }
+        id: args.id
     });
 }
 

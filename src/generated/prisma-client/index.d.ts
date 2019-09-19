@@ -234,7 +234,7 @@ export interface UserUpdateManyMutationInput {
 export interface ItemCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
-  description: String;
+  description?: Maybe<String>;
   postedBy: UserCreateOneWithoutItemsInput;
   done?: Maybe<Boolean>;
 }
@@ -328,7 +328,7 @@ export interface UserWhereInput {
 export interface ItemCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   name: String;
-  description: String;
+  description?: Maybe<String>;
   done?: Maybe<Boolean>;
 }
 

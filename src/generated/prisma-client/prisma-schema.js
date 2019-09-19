@@ -36,7 +36,7 @@ type ItemConnection {
 input ItemCreateInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   postedBy: UserCreateOneWithoutItemsInput!
   done: Boolean
 }
@@ -49,7 +49,7 @@ input ItemCreateManyWithoutPostedByInput {
 input ItemCreateWithoutPostedByInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   done: Boolean
 }
 
